@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
-  belongs_to: question
-  belongs_to: user
-  has_many: comments, :as relation1
+  belongs_to :question
+  belongs_to :user
+  has_many :comments, as: :comentable
 
 end

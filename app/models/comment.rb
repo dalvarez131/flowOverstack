@@ -1,4 +1,4 @@
 class Comment < ApplicationRecord
-  belongs_to: user
-  belongs_to: relation1, polymorphic => true
+  belongs_to :user
+  belongs_to :comentable, :polymorphic => true
 end

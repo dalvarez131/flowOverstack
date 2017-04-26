@@ -10,55 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425230006) do
-
-  create_table "answer_comments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20170426005457) do
 
   create_table "answers", force: :cascade do |t|
-    t.string   "description"
-    t.string   "text"
-    t.string   "vote"
-    t.string   "integer"
-    t.string   "user_id"
+    t.text     "description"
+    t.integer  "vote"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "description"
-    t.string   "text"
-    t.string   "user_id"
-    t.string   "integer"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "question_comments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "comentable_type"
+    t.integer  "comentable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index [nil], name: "index_comments_on_relation1_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
-    t.string   "string"
-    t.string   "description"
-    t.string   "text"
-    t.string   "vote"
-    t.string   "integer"
-    t.string   "user_id"
+    t.text     "description"
+    t.integer  "vote"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
+    t.string   "email",                  default: "", null: false
     t.string   "password"
-    t.string   "string"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

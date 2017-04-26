@@ -3,15 +3,40 @@
   <head>
     <title>FlowOverstack</title>
     <%= csrf_meta_tags %>
-
+      <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--bootstrap & js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <!--barra de navegación fija-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+       <a class="navbar-brand" href="#">
+    <img src="/assets/images/stack.png" width="30" height="30" alt="">
+  </a>											
+      <a class="navbar-brand" href="#">Flow OverStack</a>
+    </div>
+    <form class="form-inline nav navbar-nav navbar-center">
+    <input class="form-control mr-sm-2" type="text" placeholder="Buscar pregunta">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
   <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-
     <%= yield %>
   </body>
+  <div class="panel-footer navbar-fixed-bottom row">
+  		<div class="col-sm-4"></div>
+  		<div class="col-sm-4 text-center">Diana & Robert</div>
+  		<div class="col-sm-4"></div>
+  </div>
 </html>

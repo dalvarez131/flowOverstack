@@ -1,14 +1,17 @@
-<% @questions.each do |question|%>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3><%= link_to question_path(question.id) do %>
+<ul class="nav nav-tabs pull  " style="text-align:right ">All Questions
+  <li role="presentation" class="active"><a href="#">Oldest</a></li>
+  <li role="presentation"><a href="#">Newest</a></li>
+  <li role="presentation"><a href="#">Active</a></li>
+</ul>
+
+<% @questions.each do |question|%>
+      <h3 style="font-size:18px; line-height:1px"><%= link_to question_path(question.id) do %>
         <%=question.title%></h3>
       <%end%>
-    </div>
-    <%owner = User.find_by(question.user_id)%>
-    <div class="panel-body">creado por <%= owner.email %> el día <%=question.created_at%></div>
-  </div>
+    <%owner = User.find_by(id: question.user_id)%>
+    <div class="panel-body" style="font-size:12px; line-height:1px">creado por <%= owner.email %> el día <%=question.created_at%></div>
+    <hr style="color: #0056b2;" />
 <% end %>
 
 <%if current_user %>

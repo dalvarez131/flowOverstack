@@ -4,23 +4,15 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    if current_user
   	   @question = current_user.questions.build
-     else
-       flash[:notice] = "Registrate para hacer preguntas!"
-     end
   end
 
   def create
-    if current_user
-  	   @question = current_user.questions.build(question_params)
- 	     if @question.save
- 		      redirect_to @question
- 	     else
- 		       render :new
-       end
-     else
-         flash[:notice] = "Registrate para hacer preguntas!"
+    @question = Question.new(question_params)
+ 	   if @question.save
+ 		    redirect_to @question
+ 	   else
+ 		     render :new
      end
   end
 
@@ -30,6 +22,7 @@ class QuestionsController < ApplicationController
 
   private
    def question_params
-   	params.require(:question).permit(:title, :description)
+   	params.require(:question).permit(:title, :description).merge(user_id: current_user.id)
    end
+
 end

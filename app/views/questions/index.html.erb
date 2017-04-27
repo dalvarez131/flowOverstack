@@ -6,12 +6,31 @@
 </ul>
 
 <% @questions.each do |question|%>
+  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+    <div style="line-height:25px"><%= link_to question_path(question.id) do %>
+      <span class="glyphicon glyphicon-triangle-top"></span></div>
+    <%end%>
+
+    <%if question.vote %>
+      <p ><%= question.vote %></p>
+    <% else %>
+      <p style="font-size:12px; line-height:6px">0</p>
+    <% end %>
+    <p style="font-size:12px; line-height:6px">Votos</p>
+    <div style="line-height:1px"><%= link_to question_path(question.id) do %>
+      <span class="glyphicon glyphicon-triangle-bottom"></span></div>
+    <%end%>
+
+  </div>
+  <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
       <h3 style="font-size:18px; line-height:1px"><%= link_to question_path(question.id) do %>
         <%=question.title%></h3>
       <%end%>
     <%owner = User.find_by(id: question.user_id)%>
     <div class="panel-body" style="font-size:12px; line-height:1px">creado por <%= owner.email %> el día <%=question.created_at%></div>
     <hr style="color: #0056b2;" />
+  </div>
+
 <% end %>
 
 <%if current_user %>

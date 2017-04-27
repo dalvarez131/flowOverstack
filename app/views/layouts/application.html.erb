@@ -28,7 +28,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-            <li><p style="color:grey; text-align:center">Hola <%=current_user.email%>    </p></li>
+            <li><a href="#" style="color:grey; text-align:center"> Hola <%=current_user.email%>    </a></li>
             <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><span class="glyphicon glyphicon-user"></span>  Sign Out</a></li>
           <% else %>
             <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span>  Sign Up</a></li>

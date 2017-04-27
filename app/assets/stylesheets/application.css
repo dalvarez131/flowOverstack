@@ -1,3 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+.container{
+   width: 80%;
+}
+.container-fluid{
+   width: 80%;
+}
+.navbar img{
+  text-align: center;
+}
+.navbar-brand a{
+  margin-left: 80%;
+
+}
+#imagenppal{
+  height: 30px;
+  text-align: center;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

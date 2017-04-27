@@ -4,6 +4,7 @@ class CreateAnswers < ActiveRecord::Migration[5.0]
       t.text :description
       t.integer :vote
       t.integer :user_id
+      t.integer :question_id
 
       t.timestamps
     end

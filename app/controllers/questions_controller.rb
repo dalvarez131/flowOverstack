@@ -4,18 +4,26 @@ class QuestionsController < ApplicationController
   end
 
   def new
-  	@question = current_user.questions.build
-  end	
+    if current_user
+  	   @question = current_user.questions.build
+     else
+       flash[:notice] = "Registrate para hacer preguntas!"
+     end
+  end
 
   def create
-  	@question = current_user.questions.build(question_params)
- 	if @question.save
- 		redirect_to @question
- 	else 
- 		render :new
-    end
+    if current_user
+  	   @question = current_user.questions.build(question_params)
+ 	     if @question.save
+ 		      redirect_to @question
+ 	     else
+ 		       render :new
+       end
+     else
+         flash[:notice] = "Registrate para hacer preguntas!"
+     end
   end
-  
+
   def show
   	@question = Question.find(params[:id])
   end

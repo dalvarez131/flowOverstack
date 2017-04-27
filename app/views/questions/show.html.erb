@@ -4,13 +4,13 @@
 <h3><%= @question.title%> </h3>
 <div class="panel-body">
 <p><%= @question.description%> </p>
-	<% @question.comments.each do |comment|%>
+<% @question.comments.each do |comment|%>
 	<div><%=comment.description%></div>
-	<%end%>
-	<%=form_for [@question, @question.comments.new] do |f| %>
+<%end%>
+<%=form_for [@question, @question.comments.new] do |f| %>
 	<%= f.text_area :description%>
 	<%= f.submit %>
-	<%end%>
+<%end%>
 </div>
 
 <% @question.answers.each do |answer|%>

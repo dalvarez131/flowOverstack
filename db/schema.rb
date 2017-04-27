@@ -12,37 +12,52 @@
 
 ActiveRecord::Schema.define(version: 20170427005353) do
 
+  create_table "answer_comments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "answers", force: :cascade do |t|
-    t.text     "description"
-    t.integer  "vote"
-    t.integer  "user_id"
+    t.string   "description"
+    t.string   "text"
+    t.string   "vote"
+    t.string   "integer"
+    t.string   "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "question_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text     "description"
-    t.integer  "user_id"
-    t.string   "comentable_type"
-    t.integer  "comentable_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index [nil], name: "index_comments_on_relation1_id"
+    t.string   "description"
+    t.string   "text"
+    t.string   "user_id"
+    t.string   "integer"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "question_comments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
-    t.text     "description"
-    t.integer  "vote"
-    t.integer  "user_id"
+    t.string   "string"
+    t.string   "description"
+    t.string   "text"
+    t.string   "vote"
+    t.string   "integer"
+    t.string   "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email"
     t.string   "password"
+    t.string   "string"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false

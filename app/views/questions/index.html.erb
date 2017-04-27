@@ -1,12 +1,16 @@
 <% @questions.each do |question|%>
-<div class="panel panel-default">
-<div class="panel-heading">
-<h3><%= link_to question_path(question.id) do %>
-<%=question.title%></h3>
-<%end%>
-</div>
-<div class="panel-body">creado por <%=question.user_id%> el día <%=question.created_at%></div>
-</div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3><%= link_to question_path(question.id) do %>
+        <%=question.title%></h3>
+      <%end%>
+    </div>
+    <%owner = User.find_by(question.user_id)%>
+    <div class="panel-body">creado por <%= owner.email %> el día <%=question.created_at%></div>
+  </div>
 <% end %>
 
-<a href="/questions/new" class="btn btn-lg btn-success fixed-bottom" style="position: absolute; bottom: 0; right:0; margin: 10px;">Has una pregunta!</a>
+<%if current_user %>
+  <a href="/questions/new" class="btn btn-lg btn-success fixed-bottom" style="position: absolute; bottom: 0; right:0; margin: 10px;">Has una pregunta!</a>
+<% end %>

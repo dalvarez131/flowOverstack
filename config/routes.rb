@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/delete', to: 'users#delete'
+
   get 'comments/new'
 
   get 'comments/create'

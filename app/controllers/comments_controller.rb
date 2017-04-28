@@ -4,12 +4,22 @@ class CommentsController < ApplicationController
   end
 
   def create
-  	@question = Question.find(params[:question_id])
-  	@comment = @question.comments.new(comment_params)
-    if @comment.save
-      redirect_to question_path(params[:question_id])
+    if (params.has_key?(:question_id))
+      @question = Question.find(params[:question_id])
+  	  @comment = @question.comments.new(comment_params)
+      if @comment.save
+        redirect_to question_path(params[:question_id])
+      else
+        redirect_to question_path(params[:question_id])
+      end
     else
-      redirect_to question_path(params[:question_id])
+      @answer = Answer.find(params[:answer_id])
+      @comment = @answer.comments.new(comment_params)
+      if @comment.save
+        redirect_to question_path(@answer.question_id)
+      else
+        redirect_to question_path(@answer.question_id)
+      end
     end
   end
 

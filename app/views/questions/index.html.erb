@@ -1,4 +1,3 @@
-
 <ul class="nav nav-tabs pull  " style="text-align:right ">All Questions
   <li role="presentation" class="active"><a href="#">Oldest</a></li>
   <li role="presentation"><a href="#">Newest</a></li>
@@ -11,10 +10,10 @@
       <span class="glyphicon glyphicon-triangle-top"></span></div>
     <%end%>
 
-    <%if question.vote %>
-      <p ><%= question.vote %></p>
+    <%if question.votes %>
+      <p><%= question.votes.count %></p>
     <% else %>
-      <p style="font-size:12px; line-height:6px">0</p>
+      <p style="font-size:12px; line-height:6px"><%= question.votes.count %></p>
     <% end %>
     <p style="font-size:12px; line-height:6px">Votos</p>
     <div style="line-height:1px"><%= link_to question_path(question.id) do %>

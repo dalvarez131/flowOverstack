@@ -1,44 +1,59 @@
-<h1>Pregunta</h1>
-<div class="panel panel-default">
-<div class="panel-heading">
-<h3><%= @question.title%> </h3> 
-<div>
-	<div style="line-height:25px">
-	<%= link_to question_votes_path(@question), method: :post do %>
-      <span class="glyphicon glyphicon-triangle-top"></span>
-    <% end %>
-    </div>
-	<h3><%=@question.votes.count%></h3>
-	<div style="line-height:25px"><%= link_to question_votes_path(@question), method: :post do %>
-      <span class="glyphicon glyphicon-triangle-bottom"></span></div>
-      <% end %>
+<div class="bloque" style="margin-top:60px">
+	<h3><%= @question.title%> </h3>
+	<hr style="color: #0056b2;" />
+	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+		<div style="line-height:25px">
+			<%= link_to question_votes_path(@question), method: :post do %>
+	      <span class="glyphicon glyphicon-triangle-top"></span>
+			<% end %>
+		</div>
+
+		<h3><%=@question.votes.count%></h3>
+
+		<div style="line-height:25px"><%= link_to question_votes_path(@question), method: :post do %>
+	      <span class="glyphicon glyphicon-triangle-bottom"></span>
+				<% end %>
+		</div>
+	</div>
+	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+		<div class="panel-body">
+			<p><%= @question.description%></p>
+			<hr style="color: #0056b2;" />
+			<p><strong>Comentarios de la pregunta</strong></p>
+			<hr style="color: #0056b2;" />
+			<% @question.comments.each do |comment|%>
+				<div class="question_comments" style="font-size:12px"><%=comment.description%></div>
+				<hr style="color: #0056b2;" />
+			<%end%>
+
+			<%=form_for [@question, @question.comments.new] do |f| %>
+				<%= f.text_area :description, cols: "90", rows: "1"%>
+				<%= f.submit %>
+			<%end%>
+			<hr style="color: #0056b2;" />
+			<p><strong>Respuestas</strong></p>
+			<hr style="color: #0056b2;" />
+
+
+			<% @question.answers.each do |answer|%>
+			  <div><%=answer.description%></div>
+			  <div><%= answer.votes.count %></div>
+				<%=form_for [answer, answer.comments.new] do |f| %>
+					<%= f.text_area :description, cols: "90", rows: "1"%>
+					<%= f.submit %>
+				<%end%>
+				<p><strong>Comentarios de la respuesta</strong></p>
+
+				<% answer.comments.each do |comment|%>
+					<div><%=comment.description%></div>
+				<%end%>
+				<hr style="color: #0056b2;" />
+			<%end%>
+
+			<%=form_for [@question, @question.answers.new] do |f| %>
+				<%= f.text_area :description, cols: "90", rows: "1"%>
+				<%= f.submit %>
+			<%end%>
+		</div>
+	</div>
 </div>
-<div class="panel-body">
-<p><%= @question.description%></p>
-<% @question.comments.each do |comment|%>
-	<div><%=comment.description%></div>
-<%end%>
-<%=form_for [@question, @question.comments.new] do |f| %>
-	<%= f.text_area :description%>
-	<%= f.submit %>
-<%end%>
-</div>
-
-<% @question.answers.each do |answer|%>
-    <div><%=answer.description%></div>
-    <div><%= answer.vote %></div>
-	<%=form_for [answer, answer.comments.new] do |f| %>
-	<%= f.text_area :description%>
-	<%= f.submit %>
-	<%end%>
-
-  <% answer.comments.each do |comment|%>
-	<div><%=comment.description%></div>
-  <%end%>
-<%end%>
-
-
-<%=form_for [@question, @question.answers.new] do |f| %>
-<%= f.text_area :description%>
-<%= f.submit %>
-<%end%>

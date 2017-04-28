@@ -19,6 +19,13 @@ class QuestionsController < ApplicationController
   def show
   	@question = Question.find(params[:id])
   end
+  
+  def create_vote
+    @question = Question.find(params[:id])
+    @question.vote = @question.vote + 1
+    @question.save
+    redirect_to  
+  end
 
   private
    def question_params

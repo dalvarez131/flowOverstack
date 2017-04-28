@@ -1,23 +1,18 @@
 Rails.application.routes.draw do
+  get 'votes/create'
+
   get 'users/delete', to: 'users#delete'
 
-  get 'comments/new'
-
-  get 'comments/create'
-
-  get 'answer/create'
-
-  get 'answer/new'
-
-  get 'question/show'
-
+ 
   root 'questions#index'
   resources :questions do
   	resources :comments
+    resources :votes
   	resources :answers, only: [:new, :create]
   end
 
   resources :answer do
+  resources :votes
   resources :comments, only: [:new, :create]
   end
   devise_for :users

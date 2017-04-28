@@ -3,16 +3,26 @@
 	<hr style="color: #0056b2;" />
 	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 		<div style="line-height:25px">
-			<%= link_to question_votes_path(@question), method: :post do %>
+
+		<%= link_to question_votes_path(@question),method: :post do %>
+			<span class="glyphicon glyphicon-triangle-top"></span>
+		<% end %>
+
+			<!-- <%= link_to question_votes_path(@question), method: :post do %>
 	      <span class="glyphicon glyphicon-triangle-top"></span>
-			<% end %>
+			<% end %> -->
 		</div>
 
 		<h3><%=@question.votes.count%></h3>
+		<div style="line-height:25px">
 
-		<div style="line-height:25px"><%= link_to question_votes_path(@question), method: :post do %>
+		<%= link_to question_votes_path(@question), method: :post do %>
+			<span class="glyphicon glyphicon-triangle-bottom"></span>
+		<% end %>
+
+			<!-- <%= link_to question_votes_path(@question), method: :post do %>
 	      <span class="glyphicon glyphicon-triangle-bottom"></span>
-				<% end %>
+			<% end %> -->
 		</div>
 	</div>
 	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
@@ -22,7 +32,10 @@
 			<p><strong>Comentarios de la pregunta</strong></p>
 			<hr style="color: #0056b2;" />
 			<% @question.comments.each do |comment|%>
-				<div class="question_comments" style="font-size:12px"><%=comment.description%></div>
+				<div class="question_comments" style="font-size:12px"><%=comment.description%>
+						<%@user_cq = User.find(comment.user_id)%>
+						<p style="color:blue">user: <%=@user_cq.email%></p>
+				</div>
 				<hr style="color: #0056b2;" />
 			<%end%>
 
@@ -36,16 +49,23 @@
 
 
 			<% @question.answers.each do |answer|%>
-			  <div><%=answer.description%></div>
+			  <div class="answer" style="font-size:12px"><%=answer.description%></div>
+				<%@user_a = User.find(answer.user_id)%>
+				<p style="color:gray">user: <%=@user_a.email%></p>
+
 			  <div><%= answer.votes.count %></div>
 				<%=form_for [answer, answer.comments.new] do |f| %>
 					<%= f.text_area :description, cols: "90", rows: "1"%>
 					<%= f.submit %>
 				<%end%>
 				<p><strong>Comentarios de la respuesta</strong></p>
-
+				<%cont = 0%>
 				<% answer.comments.each do |comment|%>
-					<div><%=comment.description%></div>
+					<%if answer.comments.length-1 > cont%>
+						<%cont = cont +1%>
+						<%@user_ca = User.find(answer.user_id)%>
+						<div class="answer_comments" style="font-size:12px"><%=comment.description%><p style="color:blue">user: <%=@user_ca.email%></p></div>
+					<%end%>
 				<%end%>
 				<hr style="color: #0056b2;" />
 			<%end%>

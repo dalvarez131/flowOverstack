@@ -18,17 +18,25 @@ class QuestionsController < ApplicationController
 
   def show
   	@question = Question.find(params[:id])
-  #   @answer = Answer.find_by(@question.answer_id)
-  # <%owner = User.find_by(id: question.user_id)%>
-
   end
 
   def create_vote
-    @question = Question.find(params[:id])
-    @question.vote = @question.vote + 1
-    @question.save
-    redirect_to
+      @question = Question.find(params[:id])
+      @vote = @question.votes.new(user_id: current_user.id)
+      if @vote.save
+        redirect_to question_path(params[:id])
+      else
+        redirect_to question_path(params[:id])
+      end
   end
+
+  def delete_vote
+    @question = Question.find(params[:id])
+    @vote = @question.votes.find(user_id: current_user.id)
+    @vote.destroy
+    redirect_to question_path(params[:id])
+  end
+
 
   private
    def question_params

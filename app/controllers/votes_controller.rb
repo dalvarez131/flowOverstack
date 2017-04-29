@@ -25,5 +25,15 @@ class VotesController < ApplicationController
       end
     end
   end
+  def destroy
+    if (params.has_key?(:question_id))
+      @question = Question.find(params[:question_id])
+      @vote = @question.votes.find(user_id: current_user.id)
+      @vote.destroy
+      redirect_to question_path(@question.id)
+    else
+      redirect_to question_path(@question.id)
+    end
+  end
 
 end

@@ -10,7 +10,8 @@ class AnswersController < ApplicationController
  	  if @answer.save
  		   redirect_to question_path(params[:question_id])
  	   else
- 		    redirect_to question_path(params[:question_id])
+       @question = Question.find(params[:question_id])
+       render "/questions/show"
     end
   end
    private

@@ -12,7 +12,7 @@
 
 		<h3><%=@question.votes.count%></h3>
 		<div style="line-height:25px">
-		<%= link_to votes_question_path(@question), method: :delete, data: { confirm: 'Are you sure?' } do %>
+		<%= link_to votes_question_path(@question), method: :delete do %>
 			<span class="glyphicon glyphicon-triangle-bottom"></span>
 		<% end %>
 		</div>
@@ -44,13 +44,13 @@
 			<% @question.answers.each do |answer|%>
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 					<div style="line-height:25px">
-						<%= link_to answer_votes_path(answer),method: :post do %>
+						<%= link_to votes_answer_path(answer),method: :post do %>
 							<span class="glyphicon glyphicon-triangle-top"></span>
 						<% end %>
 					</div>
 					<p style="font-size:20px"><%=answer.votes.count%></p>
 					<div style="line-height:25px">
-						<%= link_to answer_votes_path(answer), method: :post do %>
+						<%= link_to votes_answer_path(answer), method: :delete do %>
 						<span class="glyphicon glyphicon-triangle-bottom"></span>
 					<% end %>
 					</div>
@@ -64,6 +64,9 @@
 							<%= f.submit %>
 						<%end%>
 					<%end%>
+
+
+
 					<p><strong><%= answer.comments.count%>  Comentario(s) de la respuesta</strong></p>
 					<%cont = 0%>
 					<% answer.comments.each do |comment|%>

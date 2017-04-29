@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   end
 
   resources :answer do
-  resources :votes
   resources :comments, only: [:new, :create]
+  member do
+      post "votes", to: "answers#create_vote"
+      delete "votes", to: "answers#delete_vote"
+    end
+
   end
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

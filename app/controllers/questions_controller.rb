@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
 
   def delete_vote
     @question = Question.find(params[:id])
-    @vote = @question.votes.find(user_id: current_user.id)
+    @vote = @question.votes.find_by(user_id: current_user.id)
     @vote.destroy
     redirect_to question_path(params[:id])
   end

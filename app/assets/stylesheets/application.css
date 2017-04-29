@@ -19,6 +19,19 @@
   text-align: center;
 }
 
+
+.search_form .form-control {
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+}
+.search_form .btn {
+	display: inline-block;
+	vertical-align: top;
+	width: 28%;	
+}
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

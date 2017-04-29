@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/search'
+
   get 'votes/create'
 
   get 'users/delete', to: 'users#delete'

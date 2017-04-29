@@ -1,0 +1,9 @@
+<h1>Preguntas que cumplen con el criterio de búsqueda</h1>
+<div class="container">
+<% @result.each do |e|%>
+<%id = e.id %> 
+  <%= link_to "/questions/#{id}" do %><h3><%= e.title %></h3>
+  <% end %> 
+ <h4><%= e.description %></h4>
+<% end %>
+</div>

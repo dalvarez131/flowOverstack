@@ -5,11 +5,15 @@ Rails.application.routes.draw do
 
   get 'users/delete', to: 'users#delete'
 
- 
+
   root 'questions#index'
   resources :questions do
   	resources :comments
-    resources :votes
+    member do
+      post "votes", to: "questions#create_vote"
+      delete "votes", to: "questions#delete_vote"
+    end
+
   	resources :answers, only: [:new, :create]
   end
 

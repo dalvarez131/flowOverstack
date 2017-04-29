@@ -6,6 +6,7 @@ class VotesController < ApplicationController
   end
 
   def create
+
     if (params.has_key?(:question_id))
       @question = Question.find(params[:question_id])
   	  @vote = @question.votes.new(user_id: current_user.id)
@@ -16,7 +17,7 @@ class VotesController < ApplicationController
       end
     else
       @answer = Answer.find(params[:answer_id])
-      @vote = @answer.votes.new(vote_params)
+      @vote = @answer.votes.new(user_id: current_user.id)
       if @vote.save
         redirect_to question_path(@answer.question_id)
       else
@@ -24,4 +25,15 @@ class VotesController < ApplicationController
       end
     end
   end
+  def destroy
+    if (params.has_key?(:question_id))
+      @question = Question.find(params[:question_id])
+      @vote = @question.votes.find(user_id: current_user.id)
+      @vote.destroy
+      redirect_to question_path(@question.id)
+    else
+      redirect_to question_path(@question.id)
+    end
+  end
+
 end
